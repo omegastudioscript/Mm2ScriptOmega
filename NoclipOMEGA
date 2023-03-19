@@ -1,17 +1,14 @@
-noclip = false
-game:GetService('RunService').Stepped:connect(function()
-if noclip then
-game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+local noclip = true -- Gets if you want the noclip
+char = game.Players.LocalPlayer.Character -- Gets your player
+while true do -- Make sure someone is in game
+if noclip == true then
+for _,v in pairs(char:children()) do
+pcall(function()
+if v.className == "Part" then
+v.CanCollide = false
 end
 end)
-plr = game.Players.LocalPlayer
-mouse = plr:GetMouse()
-mouse.KeyDown:connect(function(key)
- 
-if key == "e" then
-noclip = not noclip
-game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
 end
-end)
-print('Loaded')
-print('Press "E" to noclip')
+end
+game:service("RunService").Stepped:wait()
+end
